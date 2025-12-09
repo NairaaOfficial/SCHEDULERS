@@ -1,0 +1,55 @@
+name: SNAPCHAT STORY SCHEDULER
+
+on:
+  workflow_dispatch:
+  # schedule:
+  #   - cron: '30 12 * * *'  # Runs at 6:00 PM IST
+  #   - cron: '0 17 * * *'   # Runs at 10:30 PM IST
+  
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      # Checkout the repository
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            STORY_TO_UPLOAD/
+            SNAPCHAT/
+            counter_video.txt
+            requirements.txt
+          fetch-depth: 1
+
+      # Set up Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12.9'
+
+      # Install the necessary packages
+      - name: Installed package list
+        run: apt list --installed
+      
+      # Download Video from your server
+      - name: Download Video
+        run: |
+          VIDEO_NUMBER=$(cat counter_video.txt)
+          echo "Downloading video_${VIDEO_NUMBER}.mp4"
+          curl -o "STORY_TO_UPLOAD/story_${VIDEO_NUMBER}.mp4" "https://nairaa-babe-data.onrender.com/videos/Video_${VIDEO_NUMBER}.mp4"
+
+      # Install dependencies
+      - name: Install dependencies
+        run: |
+         python3 -m pip install --upgrade pip
+         pip3 install -r requirements.txt
+
+      # Run Snapchat upload script
+      - name: Run Snapchat Story Upload
+        env:
+            SNAPCHAT_CLIENT_ID: ${{ secrets.SNAPCHAT_CLIENT_ID }}
+            SNAPCHAT_CLIENT_SECRET: ${{ secrets.SNAPCHAT_CLIENT_SECRET }}
+            SNAPCHAT_ACCESS_TOKEN: ${{ secrets.SNAPCHAT_ACCESS_TOKEN }}
+            SNAPCHAT_REFRESH_TOKEN: ${{ secrets.SNAPCHAT_REFRESH_TOKEN }}
+        run: python3 SNAPCHAT/snapchat_story.py
