@@ -1,4 +1,4 @@
-name: IMAGE
+name: THREADS IMAGE SCHEDULER
 
 on:
   workflow_dispatch:

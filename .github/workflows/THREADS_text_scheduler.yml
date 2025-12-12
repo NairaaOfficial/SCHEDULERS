@@ -1,10 +1,9 @@
-name: VIDEO
+name: THREADS TEXT SCHEDULER
 
 on:
   workflow_dispatch:
   # schedule:
-  #   - cron: '30 11 * * *'   # Runs at 5:00 PM IST
-  #   - cron: '30 15 * * *'  # Runs at 9:00 PM IST
+  #    - cron: '0 */5 * * *'
   
 jobs:
   run-script:
@@ -49,8 +48,8 @@ jobs:
             THREADS_BASE_URL: ${{ secrets.THREADS_BASE_URL }}
             RENDER_BASE_IMAGE_URL: ${{ secrets.RENDER_BASE_IMAGE_URL }}
             RENDER_BASE_VIDEO_URL: ${{ secrets.RENDER_BASE_VIDEO_URL }}
-            THREADS_VIDEO_CAPTION_KEY: ${{ secrets.THREADS_VIDEO_CAPTION_KEY }}
-        run: python3 THREADS/thread_video.py
+            THREADS_TEXT_CAPTION_KEY: ${{ secrets.THREADS_TEXT_CAPTION_KEY }}
+        run: python3 THREADS/thread_text.py
         
       # # Check if .env has been modified, pull, and push the modified changes.
       # - name: Commit and Push Changes
