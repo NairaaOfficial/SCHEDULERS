@@ -1,4 +1,4 @@
-name: COUNTER IMAGE
+name: SOCIAL MEDIA COUNTER VIDEO SCHEDULER
 
 on:
   workflow_dispatch:
@@ -16,15 +16,15 @@ jobs:
         uses: actions/checkout@v4
         with:
           sparse-checkout: |
-            counter_image.py
-            counter_image.txt
+            counter_video.py
+            counter_video.txt
           fetch-depth: 1
 
       # Set up Python environment
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.12.9'  # Specify the Python version you need
+          python-version: '3.12.9'
 
       # Install the necessary packages
       - name: Installed package list
@@ -32,14 +32,14 @@ jobs:
 
       # Run your Python script
       - name: Run Python script
-        run: python3 counter_image.py
+        run: python3 counter_video.py
 
-      # Check if counter_image.txt has been modified, pull, and push the modified changes.
+      # Check if counter_video.txt has been modified, pull, and push the modified changes.
       - name: Commit and Push Changes
         run: |
           git config --local user.name "github-actions"
           git config --local user.email "github-actions@github.com"
-          git add counter_image.txt
-          git commit -m "Update counter_image.txt after processing" || echo "No changes to commit"
+          git add counter_video.txt
+          git commit -m "Update counter_video.txt after processing" || echo "No changes to commit"
           git pull --rebase origin main || echo "No changes to pull"
           git push || echo "No changes to push"
