@@ -1,15 +1,15 @@
-name: TELEGRAM IMAGE UPLOADER
+name: TELEGRAM PUBLIC VIDEO SCHEDULER
 
 on:
   workflow_dispatch:
   # schedule:
-  #   - cron: '30 7 * * *'   # Runs at 1:00 PM IST
-  #   - cron: '30 9 * * *'  # Runs at 3:00 PM IST
+  #   - cron: '30 11 * * *'  # Runs at 5:00 PM IST
+  #   - cron: '30 15 * * *'  # Runs at 9:00 PM IST
   
 jobs:
   run-script:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 60
     steps:
       # Checkout the repository
       - name: Checkout Code
@@ -19,7 +19,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.12.9'  # Specify the Python version you need
+          python-version: '3.12.9'
       
       # Install the necessary packages
       - name: Installed package list
@@ -33,8 +33,4 @@ jobs:
 
       # Run your Python script
       - name: Run Python script
-        env:
-          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-          CHAT_ID: ${{ secrets.CHAT_ID }}
-          RENDER_BASE_IMAGE_URL: ${{ secrets.RENDER_BASE_IMAGE_URL }}
-        run: python3 TELEGRAM/telegram_image.py
+        run: python3 TELEGRAM/telegram_video_public/telegram_video_public.py

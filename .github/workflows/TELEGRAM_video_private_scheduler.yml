@@ -1,10 +1,9 @@
-name: TELEGRAM PUBLIC VIDEO UPLOADER
+name: TELEGRAM PRIVATE VIDEO UPLOADER
 
 on:
   workflow_dispatch:
   # schedule:
-  #   - cron: '30 11 * * *'  # Runs at 5:00 PM IST
-  #   - cron: '30 15 * * *'  # Runs at 9:00 PM IST
+  #   - cron: '30 7 * * *'   # Runs at 1:00 PM IST
   
 jobs:
   run-script:
@@ -19,7 +18,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.12.9'  # Specify the Python version you need
+          python-version: '3.12.9'
       
       # Install the necessary packages
       - name: Installed package list
@@ -33,8 +32,4 @@ jobs:
 
       # Run your Python script
       - name: Run Python script
-        env:
-          NAIRAGRAM_PUBLIC_BOT_TOKEN: ${{ secrets.NAIRAGRAM_PUBLIC_BOT_TOKEN }}
-          NAIRAGRAM_PUBLIC_CHAT_ID: ${{ secrets.NAIRAGRAM_PUBLIC_CHAT_ID }}
-          RENDER_BASE_VIDEO_URL: ${{ secrets.RENDER_BASE_VIDEO_URL }}
-        run: python3 TELEGRAM/telegram_video_public/telegram_video_public.py
+        run: python3 TELEGRAM/telegram_video_private/telegram_video_private.py
