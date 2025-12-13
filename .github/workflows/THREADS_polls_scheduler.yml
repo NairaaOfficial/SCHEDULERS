@@ -14,6 +14,8 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
+          repository: NairaaOfficial/SOCIAL_MEDIA
+          token: ${{ secrets.PRIVATE_REPO_TOKEN }}        
           sparse-checkout: |
             THREADS/
             requirements.txt
@@ -23,7 +25,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.12.9'  # Specify the Python version you need
+          python-version: '3.12.9'
 
       # Install the necessary packages
       - name: Installed package list
@@ -37,26 +39,4 @@ jobs:
 
       # Run your Python script
       - name: Run Python script
-        env:
-            APP_ID: ${{ secrets.APP_ID }}
-            APP_SECRET: ${{ secrets.APP_SECRET }}
-            THREADS_API_VERSION: ${{ secrets.THREADS_API_VERSION }}
-            THREADS_APP_ID: ${{ secrets.THREADS_APP_ID }}
-            THREADS_APP_SECRET: ${{ secrets.THREADS_APP_SECRET }}
-            THREADS_USER_ID: ${{ secrets.THREADS_USER_ID }}
-            THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
-            THREADS_BASE_URL: ${{ secrets.THREADS_BASE_URL }}
-            RENDER_BASE_IMAGE_URL: ${{ secrets.RENDER_BASE_IMAGE_URL }}
-            RENDER_BASE_VIDEO_URL: ${{ secrets.RENDER_BASE_VIDEO_URL }}
-            THREADS_POLL_CAPTION_KEY: ${{ secrets.THREADS_POLL_CAPTION_KEY }}
         run: python3 THREADS/thread_polls.py
-        
-      # # Check if .env has been modified, pull, and push the modified changes.
-      # - name: Commit and Push Changes
-      #   run: |
-      #     git config --local user.name "github-actions"
-      #     git config --local user.email "github-actions@github.com"
-      #     git add THREADS/.env
-      #     git commit -m "Update .env after processing" || echo "No changes to commit"
-      #     git pull --rebase origin main || echo "No changes to pull"
-      #     git push || echo "No changes to push"

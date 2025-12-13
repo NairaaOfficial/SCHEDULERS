@@ -20,7 +20,7 @@ jobs:
           sparse-checkout: |
             STORY_TO_UPLOAD/
             FACEBOOK/
-            counter.txt
+            counter_video.txt
             requirements.txt
           fetch-depth: 1
 
@@ -28,7 +28,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.12.9'  # Specify the Python version you need
+          python-version: '3.12.9'
 
       # Install the necessary packages
       - name: Installed package list
@@ -42,15 +42,4 @@ jobs:
 
       # Run your Python script
       - name: Run Python script
-        env:
-            APP_ID: ${{ secrets.APP_ID }}
-            APP_SECRET: ${{ secrets.APP_SECRET }}
-            API_VERSION: ${{ secrets.API_VERSION }}
-            FACEBOOK_ACCOUNT_ID: ${{ secrets.FACEBOOK_ACCOUNT_ID }}
-            FACEBOOK_BASE_URL: ${{ secrets.FACEBOOK_BASE_URL }}
-            FACEBOOK_ACCESS_TOKEN: ${{ secrets.FACEBOOK_ACCESS_TOKEN }}
-            RENDER_BASE_IMAGE_URL: ${{ secrets.RENDER_BASE_IMAGE_URL }}
-            RENDER_BASE_VIDEO_URL: ${{ secrets.RENDER_BASE_VIDEO_URL }}
-            GEMINI_IMAGE_VIDEO_CAPTION_KEY: ${{ secrets.GEMINI_IMAGE_VIDEO_CAPTION_KEY }}
-            GEMINI_FACEBOOK_TEXT_KEY: ${{ secrets.GEMINI_FACEBOOK_TEXT_KEY }}
         run: python3 FACEBOOK/facebook_story.py
