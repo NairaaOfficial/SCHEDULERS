@@ -1,9 +1,9 @@
-name: THREADS IMAGE SCHEDULER
+name: INSTAGRAM IMAGE SCHEDULER
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '30 11 * * *'   # Runs at 5:00 PM IST
+    - cron: '30 11 * * *'  # Runs at 5:00 PM IST
     - cron: '30 15 * * *'  # Runs at 9:00 PM IST
   
 jobs:
@@ -18,7 +18,7 @@ jobs:
           repository: NairaaOfficial/SOCIAL_MEDIA
           token: ${{ secrets.PRIVATE_REPO_TOKEN }}
           sparse-checkout: |
-            THREADS/
+            INSTAGRAM/
             counter_image.txt
             requirements.txt
           fetch-depth: 1
@@ -32,7 +32,7 @@ jobs:
       # Install the necessary packages
       - name: Installed package list
         run: apt list --installed
-        
+
       # Install dependencies
       - name: Install dependencies
         run: |
@@ -41,4 +41,4 @@ jobs:
 
       # Run your Python script
       - name: Run Python script
-        run: python3 THREADS/thread_image.py
+        run: python3 INSTAGRAM/instagram_image.py
