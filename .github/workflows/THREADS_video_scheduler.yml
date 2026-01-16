@@ -19,6 +19,7 @@ jobs:
           repository: NairaaOfficial/SOCIAL_MEDIA
           token: ${{ secrets.PRIVATE_REPO_TOKEN }}
           sparse-checkout: |
+            AI_MODELS/
             THREADS/
             counter_video.txt
             requirements.txt
