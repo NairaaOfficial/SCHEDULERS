@@ -3,7 +3,7 @@ name: FACEBOOK REEL SCHEDULER
 on:
   workflow_dispatch:
   schedule:
-    
+    - cron: '30 8 * * *'   # Runs at 1:00 PM IST
     - cron: '30 11 * * *'  # Runs at 5:00 PM IST
     - cron: '30 15 * * *'  # Runs at 9:00 PM IST 
   
@@ -19,6 +19,7 @@ jobs:
           repository: NairaaOfficial/SOCIAL_MEDIA
           token: ${{ secrets.PRIVATE_REPO_TOKEN }}
           sparse-checkout: |
+            AI_MODELS/
             FACEBOOK/
             counter_video.txt
             requirements.txt
